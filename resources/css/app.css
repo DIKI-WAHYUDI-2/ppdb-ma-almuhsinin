@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles untuk PPDB MA Al-Muhsinin */
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Animasi untuk form */
+.form-input {
+    @apply transition-all duration-200 ease-in-out;
+}
+
+.form-input:focus {
+    @apply transform scale-105;
+}
+
+/* Custom gradient backgrounds */
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.school-gradient {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
