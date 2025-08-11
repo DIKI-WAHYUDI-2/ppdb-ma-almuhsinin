@@ -134,6 +134,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <div
+                        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex items-center justify-center">
+                        <a href="{{ route('surat.keterangan.lulus', $calon_siswa->id) }}"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow">
+                            <i class="fas fa-file-pdf mr-2"></i> Unduh Keterangan Lulus
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Main Content Grid -->

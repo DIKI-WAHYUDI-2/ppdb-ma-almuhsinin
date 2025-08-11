@@ -61,7 +61,7 @@
                     <h1 class="text-2xl font-bold text-gray-900">Kelola Kelulusan</h1>
                 </div>
 
-                <div class="flex items-center space-x-4">
+                <!-- <div class="flex items-center space-x-4">
                     <button onclick="openBatchModal()"
                         class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
                         <i class="fas fa-users mr-2"></i>Lulus Massal
@@ -70,7 +70,7 @@
                         class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
                         <i class="fas fa-download mr-2"></i>Export
                     </button>
-                </div>
+                </div> -->
             </div>
         </header>
 
@@ -147,7 +147,8 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900">{{ $siswa->nama_lengkap }}</h3>
-                                    <p class="text-sm text-gray-600">NISN: {{ $siswa->nisn }} | Nilai: 85.5</p>
+                                    <p class="text-sm text-gray-600">NISN: {{ $siswa->nisn }} | Nilai:
+                                        {{number_format($siswa->hasil_cbt_avg_skor, 2)}}</p>
                                     <div class="flex items-center space-x-4 mt-1">
                                         <span class="text-xs text-gray-500">Tanggal:
                                             {{ $siswa->created_at }}</span>

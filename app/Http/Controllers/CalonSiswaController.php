@@ -165,8 +165,7 @@ class CalonSiswaController extends Controller
 
     public function kelulusan()
     {
-
-        $calon_siswa = CalonSiswa::all();
+        $calon_siswa = CalonSiswa::withAvg('hasilCbt', 'skor')->get();
         $jumlah_siswa_lulus = CalonSiswa::where('status_pendaftaran', 'lulus')->count();
         $jumlah_siswa_tidak_lulus = CalonSiswa::where('status_pendaftaran', 'tidak_lulus')->count();
         $jumlah_siswa_belum_diverifikasi = CalonSiswa::where('status_pendaftaran', 'menunggu verifikasi')->count();

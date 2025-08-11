@@ -36,4 +36,10 @@ class CalonSiswa extends Model
     {
         return $this->hasMany(Berkas::class);
     }
+
+    public function hasilCbt()
+    {
+        return $this->hasMany(HasilCbt::class, 'calon_siswa_id');
+    }
+
 }
