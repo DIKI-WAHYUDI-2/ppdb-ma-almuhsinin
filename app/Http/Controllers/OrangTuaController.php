@@ -204,12 +204,12 @@ class OrangTuaController extends Controller
             'status_kehidupan' => $request->status_kehidupan_ibu,
         ]);
 
-        return redirect()->route('orangtua.index')->with('success', 'Data orang tua berhasil diperbarui.');
+        return redirect()->route('calon-siswa.dashboard')->with('success', 'Data orang tua berhasil diperbarui.');
     }
 
     public function destroy(OrangTua $orangtua)
     {
         $orangtua->delete();
-        return redirect()->route('orangtua.index')->with('success', 'Data orang tua berhasil dihapus.');
+        return redirect()->route('calon-siswa.dashboard')->with('success', 'Data orang tua berhasil dihapus.');
     }
 }
