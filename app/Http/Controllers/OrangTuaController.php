@@ -18,12 +18,32 @@ class OrangTuaController extends Controller
     public function create()
     {
         $akun_id = Auth::id();
-        $email = Akun::where('id', $akun_id)->first()->email;
+        $akun = Akun::find($akun_id);
+
+        $email = $akun?->email; // pakai nullsafe operator biar aman
         $calon_siswa = CalonSiswa::where('akun_id', $akun_id)->first();
-        $ayah = OrangTua::where('calon_siswa_id', $calon_siswa->id)->where('jenis_orangtua', 'Ayah')->first();
-        $ibu = OrangTua::where('calon_siswa_id', $calon_siswa->id)->where('jenis_orangtua', 'Ibu')->first();
-        return view('calon-siswa.formulir.data-orangtua', compact('calon_siswa', 'email', 'ayah', 'ibu'));
+
+        if (!$calon_siswa) {
+            // Kalau belum ada calon siswa, set default null dan data ortu kosong
+            $ayah = null;
+            $ibu = null;
+        } else {
+            $ayah = OrangTua::where('calon_siswa_id', $calon_siswa->id)
+                ->where('jenis_orangtua', 'Ayah')
+                ->first();
+            $ibu = OrangTua::where('calon_siswa_id', $calon_siswa->id)
+                ->where('jenis_orangtua', 'Ibu')
+                ->first();
+        }
+
+        return view('calon-siswa.formulir.data-orangtua', compact(
+            'calon_siswa',
+            'email',
+            'ayah',
+            'ibu'
+        ));
     }
+
 
     public function store(Request $request)
     {

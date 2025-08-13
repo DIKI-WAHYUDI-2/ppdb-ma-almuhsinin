@@ -74,7 +74,8 @@
 
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
-                        <p class="text-sm font-medium text-gray-900">{{ $calon_siswa->nama_lengkap }}</p>
+                        <p class="text-sm font-medium text-gray-900">{{ $calon_siswa->nama_lengkap ?? "calon siswa" }}
+                        </p>
                         <p class="text-xs text-gray-500">{{ $akun->email }}</p>
                     </div>
                     <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">

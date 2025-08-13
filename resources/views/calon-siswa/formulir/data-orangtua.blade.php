@@ -75,7 +75,7 @@
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
                         <p class="text-sm font-medium text-gray-900">
-                            {{ old('nama_lengkap', $calon_siswa->nama_lengkap ?? '') }}
+                            {{ old('nama_lengkap', $calon_siswa->nama_lengkap ?? "calon siswa") }}
                         </p>
                         <p class="text-xs text-gray-500">{{ old('email', $email ?? '') }}</p>
                     </div>

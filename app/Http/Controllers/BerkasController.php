@@ -13,11 +13,19 @@ class BerkasController extends Controller
     public function create()
     {
         $akun_id = Auth::id();
-        $akun = Akun::where('id', $akun_id)->first();
+        $akun = Akun::find($akun_id);
         $calon_siswa = CalonSiswa::where('akun_id', $akun_id)->first();
-        $berkas = Berkas::where('calon_siswa_id', $calon_siswa->id)->get();
+
+        if ($calon_siswa) {
+            $berkas = Berkas::where('calon_siswa_id', $calon_siswa->id)->get();
+        } else {
+            // Kalau belum ada calon siswa, set berkas ke collection kosong
+            $berkas = collect();
+        }
+
         return view('calon-siswa.formulir.upload-berkas', compact('berkas', 'calon_siswa', 'akun'));
     }
+
 
     public function store(Request $request)
     {

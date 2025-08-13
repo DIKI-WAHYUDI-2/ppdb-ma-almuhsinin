@@ -68,7 +68,8 @@
 
                 <div class="flex items-center space-x-4">
                     <div class="text-right">
-                        <p class="text-sm font-medium text-gray-900">{{ $calon_siswa->nama_lengkap }}</p>
+                        <p class="text-sm font-medium text-gray-900">{{ $calon_siswa->nama_lengkap ?? "calon siswa" }}
+                        </p>
                         <p class="text-xs text-gray-500">{{ $akun->email }}</p>
                     </div>
                     <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
@@ -137,10 +138,14 @@
 
                     <div
                         class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex items-center justify-center">
-                        <a href="{{ route('surat.keterangan.lulus', $calon_siswa->id) }}"
-                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow">
-                            <i class="fas fa-file-pdf mr-2"></i> Unduh Keterangan Lulus
-                        </a>
+                        @if ($calon_siswa)
+                            <a href="{{ route('surat.keterangan.lulus', $calon_siswa->id) }}">
+                                Cetak Surat Keterangan Lulus
+                            </a>
+                        @else
+                            <span class="text-gray-500">Data belum tersedia</span>
+                        @endif
+
                     </div>
                 </div>
 

@@ -18,21 +18,44 @@ class CalonSiswaController extends Controller
     {
         $akun_id = Auth::id();
         $calon_siswa = CalonSiswa::where('akun_id', $akun_id)->first();
-        $verifikasi = Verifikasi::where('calon_siswa_id', $calon_siswa->id)->first();
-        $data_diri = $calon_siswa !== null;
-        $akun = Akun::where('id', $akun_id)->first();
+
+        // Default value kalau calon siswa belum ada
+        if (!$calon_siswa) {
+            $verifikasi = (object) ['status' => 'belum lengkap'];
+            $data_diri = false;
+            $jumlah_berkas = 0;
+            $jumlah_data_ortu = 0;
+            $jumlah_tes_dikerjakan = 0;
+        } else {
+            $verifikasi = Verifikasi::where('calon_siswa_id', $calon_siswa->id)->first()
+                ?? (object) ['status' => 'belum lengkap'];
+
+            $data_diri = true;
+            $jumlah_berkas = Berkas::where('calon_siswa_id', $calon_siswa->id)->count();
+            $jumlah_data_ortu = OrangTua::where('calon_siswa_id', $calon_siswa->id)->count();
+            $jumlah_tes_dikerjakan = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->count();
+        }
+
+        $akun = Akun::find($akun_id);
         $pengumuman = Pengumuman::all();
-        $jumlah_berkas = Berkas::where('calon_siswa_id', $calon_siswa->id)->count();
-        $jumlah_data_ortu = OrangTua::where('calon_siswa_id', $calon_siswa->id)->count();
-        $jumlah_tes_dikerjakan = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->count();
-        $progress = round((
+
+        $progress = round(((
             (min($jumlah_berkas, 6) / 6) +
             (min($jumlah_data_ortu, 2) / 2) +
             (min($jumlah_tes_dikerjakan, 3) / 3)
-        ) / 3 * 100);
+        ) / 3) * 100);
 
-        return view('calon-siswa.dashboard', compact('verifikasi', 'data_diri', 'calon_siswa', 'pengumuman', 'jumlah_berkas', 'progress', 'calon_siswa', 'akun'));
+        return view('calon-siswa.dashboard', compact(
+            'verifikasi',
+            'data_diri',
+            'calon_siswa',
+            'pengumuman',
+            'jumlah_berkas',
+            'progress',
+            'akun'
+        ));
     }
+
 
     public function create()
     {
@@ -176,13 +199,19 @@ class CalonSiswaController extends Controller
     {
         $akun_id = Auth::id();
         $calon_siswa = CalonSiswa::where('akun_id', $akun_id)->first();
-        $hasil_cbt = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->first();
+
+        if ($calon_siswa) {
+            $hasil_cbt = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->first();
+        } else {
+            $hasil_cbt = null; // atau bisa kasih object default kalau mau
+        }
 
         // Ambil tes yang tersedia
         $tes_tersedia = Soal::select('kategori')->distinct()->get();
 
         return view('calon-siswa.cbt.index', compact('calon_siswa', 'hasil_cbt', 'tes_tersedia'));
     }
+
 
     public function mulaiCbt($kategori)
     {
