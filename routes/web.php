@@ -10,6 +10,7 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\SendOtpMailController;
 use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\SoalController;
 use App\Mail\SendOtpMail;
 use App\Models\Akun;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,12 @@ Route::prefix('operator')->group(function () {
     Route::get('/kelulusan/calon-siswa/{id}', [KelulusanController::class, 'detailCalonSiswa'])->name('operator.detail-siswa');
 
     Route::post('/status/update/{id}', [KelulusanController::class, 'setKelulusan'])->name('operator.update-status');
+
+    Route::get('/soal', [SoalController::class, 'index'])->name('soal.index');
+    Route::post('/soal', [SoalController::class, 'store'])->name('soal.store');
+    Route::get('/soal/{id}', [SoalController::class, 'show'])->name('soal.show');
+    Route::put('/soal/{id}', [SoalController::class, 'update'])->name('soal.update');
+    Route::delete('/soal/{id}', [SoalController::class, 'destroy'])->name('soal.destroy');
 });
 
 Route::prefix('kepala-sekolah')->group(function () {
