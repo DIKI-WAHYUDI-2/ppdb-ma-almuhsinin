@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Data Orang Tua - MA Al-Muhsinin</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -82,10 +83,9 @@
                     <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                         <i class="fas fa-user text-blue-600 text-sm"></i>
                     </div>
-                    <a href="" class="text-gray-400 hover:text-gray-600 transition-colors"
-                        onclick="return confirm('Apakah Anda yakin ingin keluar?')">
+                    <button onclick="logout()" class="text-gray-400 hover:text-gray-600 transition-colors">
                         <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                    </button>
                 </div>
             </div>
         </header>
@@ -576,6 +576,31 @@
 
     <!-- Mobile Sidebar Overlay -->
     <label for="sidebar-toggle" id="sidebar-overlay" class="lg:hidden"></label>
+
+    <script>
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin keluar?')) {
+                fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = '/login';
+                        } else {
+                            console.error('Logout gagal:', response.status)
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Terjadi error saat logout', error);
+                    });
+            }
+        }
+    </script>
 </body>
 
 </html>
