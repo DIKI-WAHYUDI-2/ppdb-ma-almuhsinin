@@ -302,47 +302,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Quick Actions -->
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-200">
-                            <div class="p-6 border-b border-gray-200">
-                                <h2 class="text-xl font-bold text-gray-900">
-                                    <i class="fas fa-bolt text-orange-600 mr-2"></i>
-                                    Quick Actions
-                                </h2>
-                            </div>
-
-                            <div class="p-6">
-                                <div class="space-y-3">
-                                    <button
-                                        class="w-full flex items-center justify-between p-3 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
-                                        <div class="flex items-center">
-                                            <i class="fas fa-edit text-blue-600 mr-3"></i>
-                                            <span class="font-medium text-gray-900">Lengkapi Formulir</span>
-                                        </div>
-                                        <i class="fas fa-arrow-right text-gray-400"></i>
-                                    </button>
-
-                                    <button
-                                        class="w-full flex items-center justify-between p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors">
-                                        <div class="flex items-center">
-                                            <i class="fas fa-upload text-green-600 mr-3"></i>
-                                            <span class="font-medium text-gray-900">Upload Berkas</span>
-                                        </div>
-                                        <i class="fas fa-arrow-right text-gray-400"></i>
-                                    </button>
-
-                                    <button
-                                        class="w-full flex items-center justify-between p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors">
-                                        <div class="flex items-center">
-                                            <i class="fas fa-download text-purple-600 mr-3"></i>
-                                            <span class="font-medium text-gray-900">Download Bukti</span>
-                                        </div>
-                                        <i class="fas fa-arrow-right text-gray-400"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </main>

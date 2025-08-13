@@ -64,7 +64,7 @@
 
                 <div class="flex items-center space-x-4">
                     <div class="text-sm text-gray-600">
-                        <span class="font-medium">48</span> berkas menunggu verifikasi
+                        <span class="font-medium">{{ $jumlah_menunggu_verifikasi }}</span> calon siswa menunggu verifikasi
                     </div>
                 </div>
             </div>

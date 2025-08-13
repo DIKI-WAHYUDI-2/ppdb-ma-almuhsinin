@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Kelulusan - Dashboard Operator</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -60,17 +61,6 @@
                     </button>
                     <h1 class="text-2xl font-bold text-gray-900">Kelola Kelulusan</h1>
                 </div>
-
-                <!-- <div class="flex items-center space-x-4">
-                    <button onclick="openBatchModal()"
-                        class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                        <i class="fas fa-users mr-2"></i>Lulus Massal
-                    </button>
-                    <button onclick="exportData()"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                        <i class="fas fa-download mr-2"></i>Export
-                    </button>
-                </div> -->
             </div>
         </header>
 
@@ -147,12 +137,8 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900">{{ $siswa->nama_lengkap }}</h3>
-                                    <p class="text-sm text-gray-600">NISN: {{ $siswa->nisn }} | Nilai:
-                                        {{number_format($siswa->hasil_cbt_avg_skor, 2)}}</p>
-                                    <div class="flex items-center space-x-4 mt-1">
-                                        <span class="text-xs text-gray-500">Tanggal:
-                                            {{ $siswa->created_at }}</span>
-                                    </div>
+                                    <p class="text-sm text-gray-600">NISN: {{ $siswa->nisn }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="flex items-center space-x-3">
@@ -166,11 +152,12 @@
                                     </span>
                                 @else
                                     <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full">
-                                        <i class="fas fa-clock mr-1"></i>Belum Diverifikasi
+                                        <i class="fas fa-clock mr-1"></i>Belum Diputuskan
                                     </span>
                                 @endif
 
-                                <button onclick="openDetailModal(2)" class="text-blue-600 hover:text-blue-800">
+                                <button onclick="openDetailModal({{ $siswa->id }})"
+                                    class="text-blue-600 hover:text-blue-800">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
@@ -178,74 +165,8 @@
                     </div>
                 @endforeach
 
-                <!-- Siswa Item 2 - Tidak Lulus -->
-                <!-- <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user text-red-600 text-lg"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900">Budi Santoso</h3>
-                                <p class="text-sm text-gray-600">NISN: 1122334455 | Nilai: 65.2</p>
-                                <div class="flex items-center space-x-4 mt-1">
-                                    <span class="text-xs text-gray-500">Berkas: Bermasalah</span>
-                                    <span class="text-xs text-gray-500">Tanggal: 15 Juli 2024</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
-                                <i class="fas fa-times mr-1"></i>Tidak Lulus
-                            </span>
-                            <button onclick="openDetailModal(3)" class="text-blue-600 hover:text-blue-800">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- Siswa Item 3 - Belum Diputuskan -->
-                <!-- <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                                <i class="fas fa-user text-yellow-600 text-lg"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-900">Ahmad Fauzi Rahman</h3>
-                                <p class="text-sm text-gray-600">NISN: 1234567890 | Nilai: 78.8</p>
-                                <div class="flex items-center space-x-4 mt-1">
-                                    <span class="text-xs text-gray-500">Berkas: Terverifikasi</span>
-                                    <span class="text-xs text-gray-500">Tanggal: -</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full">
-                                <i class="fas fa-clock mr-1"></i>Belum Diputuskan
-                            </span>
-                            <div class="flex space-x-2">
-                                <button onclick="setKelulusan(1, 'lulus')"
-                                    class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
-                                    <i class="fas fa-check mr-1"></i>Lulus
-                                </button>
-                                <button onclick="setKelulusan(1, 'tidak_lulus')"
-                                    class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">
-                                    <i class="fas fa-times mr-1"></i>Tolak
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
                 <!-- Pagination -->
                 <div class="flex items-center justify-between mt-6">
-                    <div class="text-sm text-gray-700">
-                        Menampilkan <span class="font-medium">1</span> sampai <span class="font-medium">3</span> dari
-                        <span class="font-medium">187</span> calon siswa
-                    </div>
                     <div class="flex items-center space-x-2">
                         <button
                             class="px-3 py-2 text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
@@ -265,51 +186,21 @@
         </main>
     </div>
 
-    <!-- Batch Modal -->
-    <div id="batchModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
-        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" onclick="closeBatchModal()"></div>
-
+    <!-- Modal -->
+    <div id="verifikasiModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/50">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center">
             <div
-                class="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                class="inline-block w-full max-w-4xl p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-lg font-semibold text-gray-900">Lulus Massal</h3>
-                    <button onclick="closeBatchModal()" class="text-gray-400 hover:text-gray-600">
+                    <h3 id="namaSiswa" class="text-lg font-semibold text-gray-900">Kelulusan Calon Siswa</h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
 
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Kriteria Kelulusan</label>
-                        <select
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Pilih kriteria</option>
-                            <option value="nilai_min">Nilai minimum 70</option>
-                            <option value="berkas_lengkap">Berkas lengkap & terverifikasi</option>
-                            <option value="kombinasi">Kombinasi nilai & berkas</option>
-                        </select>
-                    </div>
-
-                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-info-circle text-blue-600 mr-2"></i>
-                            <span class="text-blue-800 text-sm">
-                                <strong>15 calon siswa</strong> memenuhi kriteria yang dipilih
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
-                        <button onclick="closeBatchModal()"
-                            class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                            Batal
-                        </button>
-                        <button onclick="processBatch()"
-                            class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                            <i class="fas fa-check mr-2"></i>Proses Kelulusan
-                        </button>
-                    </div>
+                <!-- Tempat berkas -->
+                <div id="berkasContainer" class="mb-6">
+                    <!-- Diisi lewat JS -->
                 </div>
             </div>
         </div>
@@ -322,36 +213,123 @@
         }
 
         function setKelulusan(id, status) {
-            const statusText = status === 'lulus' ? 'meluluskan' : 'menolak';
+            const statusText = status === 'lulus' ? 'lulus' : 'tidak lulus';
+
             if (confirm(`Apakah Anda yakin ingin ${statusText} calon siswa ini?`)) {
                 alert(`Calon siswa berhasil ${status === 'lulus' ? 'dinyatakan lulus' : 'ditolak'}!`);
-                // Reload or update UI
-                location.reload();
+
+                fetch(`/operator/status/update/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document
+                            .querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    },
+                    body: JSON.stringify({ id: id, status: status })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Berhasil:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             }
         }
 
-        function openBatchModal() {
-            document.getElementById('batchModal').classList.remove('hidden');
-        }
-
-        function closeBatchModal() {
-            document.getElementById('batchModal').classList.add('hidden');
-        }
-
-        function processBatch() {
-            if (confirm('Apakah Anda yakin ingin memproses kelulusan massal?')) {
-                alert('15 calon siswa berhasil dinyatakan lulus!');
-                closeBatchModal();
-                location.reload();
-            }
-        }
-
-        function exportData() {
-            alert('Data kelulusan berhasil diexport!');
-        }
 
         function openDetailModal(id) {
-            alert('Detail siswa akan ditampilkan');
+            const modal = document.getElementById('verifikasiModal');
+            const container = document.getElementById('berkasContainer');
+
+            modal.classList.remove('hidden');
+            container.innerHTML = `<div class="text-center py-4"><i class="fas fa-spinner fa-spin text-blue-500"></i> Memuat data...</div>`;
+
+            fetch(`/operator/kelulusan/calon-siswa/${id}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (!data || !data.calon_siswa) {
+                        throw new Error('Data siswa tidak ditemukan');
+                    }
+
+                    const berkasCount = data.berkas ? data.berkas.length : 0;
+                    const skor = data.nilai ? data.nilai.skor : 0;
+                    const orangTuaComplete = data.orang_tua ? true : false;
+
+                    let html = `
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Nama</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">NISN</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Data</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Orang Tua</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Berkas</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Nilai</th>
+                                <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-4 py-3 whitespace-nowrap">${data.calon_siswa.nama_lengkap || '-'}</td>
+                                <td class="px-4 py-3 whitespace-nowrap">${data.calon_siswa.nisn || '-'}</td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="text-green-500">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="${orangTuaComplete ? 'text-green-500' : 'text-red-500'}">
+                                        <i class="fas ${orangTuaComplete ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="${berkasCount === 6 ? 'text-green-500' : berkasCount >= 4 ? 'text-yellow-500' : 'text-red-500'}">
+                                        <i class="fas ${berkasCount === 6 ? 'fa-check-circle' : berkasCount >= 4 ? 'fa-exclamation-circle' : 'fa-times-circle'}"></i>
+                                        (${berkasCount}/6)
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <span class="${skor >= 70 ? 'text-green-500' : 'text-red-500'}">
+                                        ${skor || 0} (${skor >= 70 ? 'Lulus' : 'Gagal'})
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 whitespace-nowrap">
+                                    <div class="flex space-x-2">
+                                        <button onclick="setKelulusan(${data.calon_siswa.id}, 'lulus')" 
+                                            class="px-3 py-1 bg-green-600 text-white rounded text-sm flex items-center
+                                            ${berkasCount < 6 || skor < 70 ? 'opacity-50 cursor-not-allowed' : ''}"
+                                            ${berkasCount < 6 || skor < 70 ? 'disabled' : ''}>
+                                            <i class="fas fa-check mr-1"></i> Lulus
+                                        </button>
+                                        <button onclick="setKelulusan(${data.calon_siswa.id}, 'tidak lulus')" 
+                                            class="px-3 py-1 bg-red-600 text-white rounded text-sm flex items-center">
+                                            <i class="fas fa-times mr-1"></i> Tidak
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>`;
+
+                    container.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    container.innerHTML = `
+                    <div class="text-center py-4 text-red-500">
+                        <i class="fas fa-exclamation-triangle"></i> Gagal memuat data
+                        <p class="text-sm text-gray-600 mt-2">${error.message}</p>
+                    </div>
+                `;
+                });
+        }
+
+        function closeModal() {
+            document.getElementById('verifikasiModal').classList.add('hidden');
         }
     </script>
 </body>

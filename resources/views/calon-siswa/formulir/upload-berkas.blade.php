@@ -178,7 +178,7 @@
                                 <p class="text-gray-600 text-sm">Klik untuk upload foto</p>
                                 <p class="text-gray-400 text-xs mt-1">JPG, PNG (Max: 2MB)</p>
                             </div>
-                            <input type="file" id="pas_foto_3x4" name="pas_foto_3x4" accept="image/*" class="sr-only"
+                            <input type="file" id="pas_foto_3x4" name="pas_foto_3x4" accept="image/*" class="hidden"
                                 required>
                             <div id="preview_pas_foto_3x4"
                                 class="mt-2 {{ $berkas->where('jenis_berkas', 'Pas Foto 3x4')->first() ? '' : 'hidden' }}">
@@ -216,7 +216,7 @@
                                 <p class="text-gray-600 text-sm">Klik untuk upload foto</p>
                                 <p class="text-gray-400 text-xs mt-1">JPG, PNG (Max: 2MB)</p>
                             </div>
-                            <input type="file" id="pas_foto_2x3" name="pas_foto_2x3" accept="image/*" class="sr-only"
+                            <input type="file" id="pas_foto_2x3" name="pas_foto_2x3" accept="image/*" class="hidden"
                                 required>
                             <div id="preview_pas_foto_2x3"
                                 class="mt-2 {{ $berkas->where('jenis_berkas', 'Pas Foto 2x3')->first() ? '' : 'hidden' }}   ">
@@ -475,6 +475,38 @@
         function previewFile(filePath) {
             window.open('/' + filePath, '_blank');
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Setup event listeners for all file inputs
+            const fileInputs = [
+                'pas_foto_3x4', 'pas_foto_2x3', 'skl',
+                'skhun', 'kartu_keluarga', 'akta_kelahiran'
+            ];
+
+            fileInputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('change', function (e) {
+                        if (this.files && this.files[0]) {
+                            const previewDiv = document.getElementById(`preview_${id}`);
+                            const fileNameSpan = previewDiv.querySelector('.file-name');
+
+                            fileNameSpan.textContent = this.files[0].name;
+                            previewDiv.classList.remove('hidden');
+
+                            // For images, you could also show a thumbnail
+                            if (this.accept.includes('image')) {
+                                const reader = new FileReader();
+                                reader.onload = function (e) {
+                                    // You could add an img element to show thumbnail
+                                }
+                                reader.readAsDataURL(this.files[0]);
+                            }
+                        }
+                    });
+                }
+            });
+        });
     </script>
 </body>
 

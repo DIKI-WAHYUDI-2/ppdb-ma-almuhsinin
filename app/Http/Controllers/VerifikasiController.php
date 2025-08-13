@@ -14,7 +14,10 @@ class VerifikasiController extends Controller
         $calon_siswa = CalonSiswa::with('berkas')
             ->where('status_pendaftaran', 'menunggu verifikasi')
             ->get();
-        return view('operator.verifikasi', compact('calon_siswa'));
+        $jumlah_menunggu_verifikasi = CalonSiswa::with('berkas')
+            ->where('status_pendaftaran', 'menunggu verifikasi')
+            ->count();
+        return view('operator.verifikasi', compact('calon_siswa', 'jumlah_menunggu_verifikasi'));
     }
 
     public function getBerkas($id)

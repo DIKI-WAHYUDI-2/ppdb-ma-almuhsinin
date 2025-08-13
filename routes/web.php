@@ -84,6 +84,9 @@ Route::prefix('operator')->group(function () {
     Route::post('/verifikasi/berkas/{id}', [VerifikasiController::class, 'verifikasiBerkas'])->name('operator.verifikasi.berkas');
 
     Route::get('/kelulusan', [CalonSiswaController::class, 'kelulusan'])->name('operator.kelulusan');
+    Route::get('/kelulusan/calon-siswa/{id}', [KelulusanController::class, 'detailCalonSiswa'])->name('operator.detail-siswa');
+
+    Route::post('/status/update/{id}', [KelulusanController::class, 'setKelulusan'])->name('operator.update-status');
 });
 
 Route::prefix('kepala-sekolah')->group(function () {
