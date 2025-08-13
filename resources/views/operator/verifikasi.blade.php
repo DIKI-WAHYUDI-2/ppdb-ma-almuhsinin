@@ -36,6 +36,11 @@
                     <i class="fas fa-bullhorn mr-3"></i>
                     Pengumuman
                 </a>
+                <a href="{{ route('soal.index') }}"
+                    class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <i class="fas fa-file-alt mr-3"></i>
+                    Soal
+                </a>
                 <a href="{{ route('operator.verifikasi') }}"
                     class="flex items-center px-4 py-3 text-blue-600 bg-blue-50 rounded-lg">
                     <i class="fas fa-check-circle mr-3"></i>
@@ -64,7 +69,8 @@
 
                 <div class="flex items-center space-x-4">
                     <div class="text-sm text-gray-600">
-                        <span class="font-medium">{{ $jumlah_menunggu_verifikasi }}</span> calon siswa menunggu verifikasi
+                        <span class="font-medium">{{ $jumlah_menunggu_verifikasi }}</span> calon siswa menunggu
+                        verifikasi
                     </div>
                 </div>
             </div>

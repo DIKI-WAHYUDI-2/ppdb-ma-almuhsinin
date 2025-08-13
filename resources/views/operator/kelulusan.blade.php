@@ -36,6 +36,11 @@
                     <i class="fas fa-bullhorn mr-3"></i>
                     Pengumuman
                 </a>
+                <a href="{{ route('soal.index') }}"
+                    class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <i class="fas fa-file-alt mr-3"></i>
+                    Soal
+                </a>
                 <a href="{{ route('operator.verifikasi') }}"
                     class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                     <i class="fas fa-check-circle mr-3"></i>
