@@ -87,6 +87,26 @@
 
                                 <h3 class="text-lg font-semibold text-gray-900 mb-6">{{ $s->pertanyaan }}</h3>
 
+                                <!-- Tampilkan gambar soal jika ada -->
+                                @if($s->file_path)
+                                    <div class="mb-6">
+                                        <div class="relative group">
+                                            <img src="{{ asset($s->file_path) }}" alt="Gambar Soal"
+                                                class="rounded-lg border max-h-64 mx-auto cursor-pointer"
+                                                onclick="openImageModal('{{ asset($s->file_path) }}')">
+                                            <div
+                                                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                                <button type="button"
+                                                    class="bg-white bg-opacity-80 p-2 rounded-full text-gray-800 hover:bg-opacity-100"
+                                                    onclick="openImageModal('{{ asset($s->file_path) }}')">
+                                                    <i class="fas fa-expand"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-xs text-gray-500 text-center mt-1">Klik gambar untuk memperbesar</p>
+                                    </div>
+                                @endif
+
                                 <div class="space-y-3">
                                     <label
                                         class="flex items-center p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 cursor-pointer transition-colors">
@@ -167,11 +187,28 @@
         </div>
     </div>
 
+    <!-- Modal Gambar -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50 p-4">
+        <div class="relative max-w-4xl w-full">
+            <button onclick="closeImageModal()" class="absolute -top-12 right-0 text-white hover:text-gray-300">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <img id="modalImage" src="" alt="Gambar Soal" class="max-h-[80vh] mx-auto rounded-lg">
+            <div class="text-center mt-2 text-white">
+                <button onclick="closeImageModal()"
+                    class="bg-gray-600 text-white px-3 py-1 rounded-lg hover:bg-gray-700">
+                    <i class="fas fa-times mr-1"></i>Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentQuestion = 0;
         let totalQuestions = {{ count($soal) }};
         let timeLeft = 30 * 60; // 30 menit dalam detik
         let timerInterval;
+        let currentImageUrl = '';
 
         // Inisialisasi
         document.addEventListener('DOMContentLoaded', function () {
@@ -265,6 +302,28 @@
         function confirmSubmit() {
             clearInterval(timerInterval);
             document.getElementById('cbtForm').submit();
+        }
+
+        // Fungsi untuk gambar
+        function openImageModal(imageUrl) {
+            currentImageUrl = imageUrl;
+            document.getElementById('modalImage').src = imageUrl;
+            document.getElementById('imageModal').classList.remove('hidden');
+            document.getElementById('imageModal').classList.add('flex');
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').classList.add('hidden');
+            document.getElementById('imageModal').classList.remove('flex');
+        }
+
+        function downloadCurrentImage() {
+            const a = document.createElement('a');
+            a.href = currentImageUrl;
+            a.download = 'gambar-soal-' + (currentQuestion + 1) + '.jpg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
         // Prevent back button

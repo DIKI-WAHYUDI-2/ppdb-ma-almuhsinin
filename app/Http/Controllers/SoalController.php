@@ -21,7 +21,7 @@ class SoalController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'kategori' => 'required|string|max:100',
             'pertanyaan' => 'required|string',
             'pilihan_a' => 'required|string|max:255',
@@ -29,11 +29,37 @@ class SoalController extends Controller
             'pilihan_c' => 'required|string|max:255',
             'pilihan_d' => 'required|string|max:255',
             'jawaban_benar' => 'required|in:A,B,C,D',
+            'gambar_soal' => 'required|image|max:2048' // Maksimal 2MB
         ]);
 
-        Soal::create($request->all());
+        // Handle upload file
+        if ($request->hasFile('gambar_soal')) {
+            $file = $request->file('gambar_soal');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('soal', $filename, 'public'); // Simpan di storage/app/public/soal
 
-        return response()->json(['success' => true, 'message' => 'Soal berhasil ditambahkan']);
+            Soal::create([
+                'kategori' => $validated['kategori'],
+                'pertanyaan' => $validated['pertanyaan'],
+                'pilihan_a' => $validated['pilihan_a'],
+                'pilihan_b' => $validated['pilihan_b'],
+                'pilihan_c' => $validated['pilihan_c'],
+                'pilihan_d' => $validated['pilihan_d'],
+                'jawaban_benar' => $validated['jawaban_benar'],
+                'nama_file' => $filename,
+                'file_path' => 'storage/soal/' . $filename // Path yang bisa diakses publik
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Soal berhasil ditambahkan'
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal mengunggah gambar soal'
+        ], 400);
     }
 
     public function show($id)

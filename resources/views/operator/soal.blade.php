@@ -171,7 +171,8 @@
                     </button>
                 </div>
 
-                <form id="soalForm" method="POST" class="space-y-6" action="{{ route('soal.store') }}">
+                <form id="soalForm" method="POST" class="space-y-6" action="{{ route('soal.store') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label for="kategori" class="block text-sm font-medium text-gray-700 mb-2">Kategori Soal</label>
@@ -231,6 +232,46 @@
                         </select>
                     </div>
 
+                    <div class="upload-item">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Gambar Soal <span class="text-red-500">*</span>
+                        </label>
+                        <div class="upload-area border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors cursor-pointer"
+                            onclick="document.getElementById('gambar_soal').click()">
+                            <i class="fas fa-camera text-gray-400 text-2xl mb-2"></i>
+                            <p class="text-gray-600 text-sm">Klik untuk upload gambar</p>
+                            <p class="text-gray-400 text-xs mt-1">JPG, PNG (Max: 2MB)</p>
+                        </div>
+                        <input type="file" id="gambar_soal" name="gambar_soal" accept="image/*" class="hidden" required
+                            onchange="previewNewImage(event, 'preview_gambar_soal_img')">
+
+                        <!-- Preview for newly uploaded image -->
+                        <div id="preview_gambar_soal" class="mt-2 hidden">
+                            <p class="text-sm text-gray-600">Preview gambar baru:</p>
+                            <img id="preview_gambar_soal_img" class="mt-1 rounded-lg border max-h-48">
+                        </div>
+
+                        <!-- If image exists in database -->
+                        <div id="preview_saved_gambar_soal" class="mt-2 {{ !empty($soal->file_path) ? '' : 'hidden' }}">
+                            @if(!empty($soal->file_path))
+                                <div class="flex items-center space-x-2 text-sm text-green-600">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span class="file-name">{{ basename($soal->file_path) }}</span>
+                                    <button type="button" onclick="previewFile('{{ asset($soal->file_path) }}')"
+                                        class="px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600">
+                                        <i class="fas fa-eye mr-1"></i>Lihat
+                                    </button>
+                                    <button type="button"
+                                        onclick="downloadFile('{{ asset($soal->file_path) }}', '{{ basename($soal->file_path) }}')"
+                                        class="px-3 py-1 bg-green-500 text-white text-xs rounded hover:bg-green-600">
+                                        <i class="fas fa-download mr-1"></i>Download
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+
                     <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
                         <button type="button" onclick="closeModal()"
                             class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
@@ -248,6 +289,52 @@
     </div>
 
     <script>
+
+        function previewNewImage(event, previewImgId) {
+            const input = event.target;
+            const previewDiv = document.getElementById(`preview_${input.id}`);
+            const previewImg = document.getElementById(previewImgId);
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    previewImg.src = e.target.result;
+                    previewDiv.classList.remove('hidden');
+
+                    // Sembunyikan preview file yang tersimpan jika ada
+                    const savedPreview = document.getElementById(`preview_saved_${input.id}`);
+                    if (savedPreview) savedPreview.classList.add('hidden');
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function previewFile(url) {
+            window.open(url, '_blank'); // buka file di tab baru
+        }
+
+        function downloadFile(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function previewNewImage(event, imgId) {
+            const img = document.getElementById(imgId);
+            const container = img.closest('div');
+            const file = event.target.files[0];
+
+            if (file) {
+                img.src = URL.createObjectURL(file);
+                container.classList.remove('hidden');
+            }
+        }
+
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
             sidebar.classList.toggle('-translate-x-full');
@@ -360,34 +447,22 @@
 
             const form = this;
             const submitButton = form.querySelector('button[type="submit"]');
+            const formData = new FormData(form);
 
-            // Disable tombol submit agar tidak bisa diklik berulang
+            // Tampilkan loading
             submitButton.disabled = true;
             submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
 
-            const formData = new FormData(form);
-            const isEdit = document.getElementById('methodField') !== null;
-            const url = form.action;
-
-            // Konversi FormData ke object untuk JSON
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            // Kirim request ke server
-            fetch(url, {
-                method: 'POST', // tetap POST, _method di-handle oleh Laravel
+            fetch(form.action, {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    // Jangan set Content-Type, biarkan browser mengatur boundary
                 },
-                body: JSON.stringify(data)
+                body: formData
             })
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error('Network response was not ok');
                     return response.json();
                 })
                 .then(data => {
@@ -396,14 +471,12 @@
                         closeModal();
                         setTimeout(() => location.reload(), 1000);
                     } else {
-                        throw new Error(data.message || 'Terjadi kesalahan saat menyimpan pengumuman!');
+                        throw new Error(data.message || 'Terjadi kesalahan');
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
                     showToast(error.message, 'error');
-
-                    // Aktifkan kembali tombol submit jika terjadi error
                     submitButton.disabled = false;
                     submitButton.innerHTML = '<i class="fas fa-save mr-2"></i>Simpan';
                 });
