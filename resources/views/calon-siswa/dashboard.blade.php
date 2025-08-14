@@ -305,11 +305,11 @@
                                         <div class="flex items-start">
                                             <div
                                                 class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                                <i class="fas fa-check text-green-400 text-sm"></i>
+                                                <i class="fas fa-check text-green-600 text-sm"></i>
                                             </div>
                                             <div class="ml-4 flex-1">
-                                                <h4 class="font-medium text-gray-400">Pengumuman</h4>
-                                                <p class="text-sm text-gray-400">Hasil akan diumumkan</p>
+                                                <h4 class="font-medium text-gray-900">Pengumuman</h4>
+                                                <p class="text-sm text-gray-600">Hasil diumumkan</p>
                                             </div>
                                         </div>
                                     @else
