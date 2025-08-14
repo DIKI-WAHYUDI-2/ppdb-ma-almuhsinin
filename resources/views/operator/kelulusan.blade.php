@@ -147,11 +147,11 @@
                                 </div>
                             </div>
                             <div class="flex items-center space-x-3">
-                                @if ($siswa->status == 'lulus')
+                                @if ($siswa->status_pendaftaran == 'lulus')
                                     <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
                                         <i class="fas fa-check mr-1"></i>Lulus
                                     </span>
-                                @elseif ($siswa->status == 'tidak_lulus')
+                                @elseif ($siswa->status_pendaftaran == 'tidak lulus')
                                     <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
                                         <i class="fas fa-times mr-1"></i>Tidak Lulus
                                     </span>

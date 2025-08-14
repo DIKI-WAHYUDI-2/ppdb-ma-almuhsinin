@@ -136,16 +136,23 @@
                         </div>
                     </div>
 
-                    <div
-                        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex items-center justify-center">
-                        @if ($calon_siswa)
-                            <a href="{{ route('surat.keterangan.lulus', $calon_siswa->id) }}">
-                                Cetak Surat Keterangan Lulus
-                            </a>
-                        @else
-                            <span class="text-gray-500">Data belum tersedia</span>
-                        @endif
-
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-file-lines text-yellow-600 text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm font-medium text-gray-600">Surat Kelulusan</p>
+                                @if ($calon_siswa)
+                                    <a href="{{ route('surat.keterangan.lulus', $calon_siswa->id) }}"
+                                        class="text-lg font-bold text-green-600 hover:text-green-700">
+                                        Cetak
+                                    </a>
+                                @else
+                                    <p class="text-lg font-bold text-gray-500">Belum Tersedia</p>
+                                @endif
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -294,16 +301,29 @@
                                     @endif
 
                                     <!-- Timeline Item 5 -->
-                                    <div class="flex items-start">
-                                        <div
-                                            class="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                                            <i class="fas fa-circle text-gray-400 text-sm"></i>
+                                    @if ($calon_siswa->status_pendaftaran == 'lulus')
+                                        <div class="flex items-start">
+                                            <div
+                                                class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-check text-green-400 text-sm"></i>
+                                            </div>
+                                            <div class="ml-4 flex-1">
+                                                <h4 class="font-medium text-gray-400">Pengumuman</h4>
+                                                <p class="text-sm text-gray-400">Hasil akan diumumkan</p>
+                                            </div>
                                         </div>
-                                        <div class="ml-4 flex-1">
-                                            <h4 class="font-medium text-gray-400">Pengumuman</h4>
-                                            <p class="text-sm text-gray-400">Hasil akan diumumkan</p>
+                                    @else
+                                        <div class="flex items-start">
+                                            <div
+                                                class="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                                <i class="fas fa-circle text-gray-400 text-sm"></i>
+                                            </div>
+                                            <div class="ml-4 flex-1">
+                                                <h4 class="font-medium text-gray-400">Pengumuman</h4>
+                                                <p class="text-sm text-gray-400">Hasil akan diumumkan</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -311,44 +331,111 @@
                 </div>
             </main>
         </main>
-    </div>
 
-    <!-- Mobile Sidebar Overlay -->
-    <div class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden hidden" id="sidebar-overlay"
-        onclick="toggleSidebar()"></div>
+        @if ($calon_siswa->status_pendaftaran == 'lulus'){
+            <div id="modalKelulusan"
+                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300">
+                <div
+                    class="bg-white rounded-xl shadow-2xl w-full max-w-2xl mx-4 overflow-hidden transform transition-all duration-300 scale-95">
+                    <!-- Header dengan elemen dekoratif -->
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6 relative">
+                        <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                            <div class="absolute top-4 right-4 text-7xl">🎓</div>
+                            <div class="absolute bottom-4 left-4 text-7xl">🏆</div>
+                        </div>
+                        <h2 class="text-4xl font-bold text-white relative z-10">Selamat! 🎉</h2>
+                    </div>
 
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebar-overlay');
+                    <!-- Konten utama -->
+                    <div class="p-8 text-center">
+                        <div class="mb-6 flex flex-col items-center">
+                            <div class="inline-flex items-center justify-center w-24 h-24 bg-green-100 rounded-full mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 text-green-600" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
 
-            sidebar.classList.toggle('-translate-x-full');
-            overlay.classList.toggle('hidden');
-        }
+                            <div class="max-w-lg mx-auto">
+                                <p class="text-gray-800 mb-4 text-xl leading-relaxed">
+                                    Anda dinyatakan <span class="font-bold text-green-600">LULUS</span> seleksi penerimaan
+                                    siswa baru.
+                                </p>
+                                <p class="text-gray-600 mb-6 text-lg">
+                                    Silakan cetak surat kelulusan Anda untuk informasi lebih lanjut.
+                                </p>
+                            </div>
+                        </div>
 
-        function logout() {
-            if (confirm('Apakah Anda yakin ingin keluar?')) {
-                fetch('/logout', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                })
-                    .then(response => {
-                        if (response.ok) {
-                            window.location.href = '/login';
-                        } else {
-                            console.error('Logout gagal:', response.status)
+                        <!-- Tombol aksi -->
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="closeModal()"
+                                class="px-8 py-3 border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium rounded-lg transition-colors text-lg">
+                                Tutup
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Catatan footer -->
+                    <div class="bg-gray-50 px-8 py-4 text-center text-gray-500 border-t">
+                        <p class="text-sm">Terima kasih telah mengikuti proses seleksi kami. Untuk pertanyaan lebih lanjut,
+                            hubungi panitia penerimaan siswa baru.</p>
+                    </div>
+                </div>
+            </div>
+            }
+        @endif
+
+        <!-- Mobile Sidebar Overlay -->
+        <div class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden hidden" id="sidebar-overlay"
+            onclick="toggleSidebar()"></div>
+
+        <script>
+            function toggleSidebar() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+
+                sidebar.classList.toggle('-translate-x-full');
+                overlay.classList.toggle('hidden');
+            }
+
+            function logout() {
+                if (confirm('Apakah Anda yakin ingin keluar?')) {
+                    fetch('/logout', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         }
                     })
-                    .catch(error => {
-                        console.error('Terjadi error saat logout', error);
-                    });
+                        .then(response => {
+                            if (response.ok) {
+                                window.location.href = '/login';
+                            } else {
+                                console.error('Logout gagal:', response.status)
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Terjadi error saat logout', error);
+                        });
+                }
             }
-        }
-    </script>
+
+            function closeModal() {
+                const modal = document.getElementById('modalKelulusan');
+                const modalContent = modal.querySelector('div > div');
+
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+
+                setTimeout(() => {
+                    modal.classList.remove('opacity-100');
+                    modal.classList.add('opacity-0', 'pointer-events-none');
+                }, 200);
+            }
+        </script>
 </body>
 
 </html>
