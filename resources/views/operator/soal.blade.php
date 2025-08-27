@@ -32,12 +32,12 @@
                     Dashboard
                 </a>
                 <a href="{{ route('pengumuman.index') }}"
-                    class="flex items-center px-4 py-3 text-blue-600 bg-blue-50 rounded-lg">
+                    class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
                     <i class="fas fa-bullhorn mr-3"></i>
                     Pengumuman
                 </a>
                 <a href="{{ route('soal.index') }}"
-                    class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    class="flex items-center px-4 py-3 text-blue-600 bg-blue-50 rounded-lg">
                     <i class="fas fa-file-alt mr-3"></i>
                     Soal
                 </a>
@@ -80,12 +80,11 @@
         <main class="p-6">
             <!-- Filter & Search - Optimized -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-                <form method="GET" action="{{ route('pengumuman.index') }}"
+                <form method="GET" action="{{ route('soal.index') }}"
                     class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
                     <div class="flex items-center space-x-4">
                         <div class="relative">
-                            <input type="text" name="search" placeholder="Cari pengumuman..."
-                                value="{{ request('search') }}"
+                            <input type="text" name="search" placeholder="Cari Soal..." value="{{ request('search') }}"
                                 class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                             <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                         </div>
@@ -101,19 +100,11 @@
                             class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
                             <i class="fas fa-search mr-2"></i>Cari
                         </button>
-                        @if(request('search') || request('status'))
-                            <a href="{{ route('pengumuman.index') }}"
-                                class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                                <i class="fas fa-times mr-2"></i>Reset
-                            </a>
-                        @endif
                     </div>
                 </form>
             </div>
 
-            <!-- Pengumuman List -->
             <div class="space-y-4">
-                <!-- Pengumuman Item 1 -->
                 @foreach ($soal as $item)
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                         <div class="flex items-start justify-between">

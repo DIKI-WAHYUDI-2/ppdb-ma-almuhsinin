@@ -21,10 +21,25 @@
 </head>
 
 <body class="font-sans antialiased">
+    <div class="bg-blue-600 text-white p-4">
+    </div>
+    <header class="fixed top-0 left-0 w-full bg-blue-600 text-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-graduation-cap text-2xl"></i>
+                <span class="font-bold text-lg">MA Al-Muhsinin</span>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="{{ (route('informasi.sekolah')) }}" class="hover:text-gray-200">Informasi Sekolah</a>
+                <a href="{{ route('informasi.pendaftaran') }}" class="hover:text-gray-200">Informasi Pendaftaran</a>
+                <a href="{{ route('informasi.grafik') }}" class="hover:text-gray-200">Grafik Jumlah Pendaftar</a>
+            </nav>
+        </div>
+    </header>
     <div class="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
         <!-- Background Pattern -->
         <div class="absolute inset-0 bg-white/30 backdrop-blur-3xl"></div>
-        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=" 60" height="60"
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg width=60 height=60"
             viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fill-rule="evenodd">
                 <g fill="%239C92AC" fill-opacity="0.05">
@@ -138,7 +153,7 @@
                                             autocomplete="current-password" required
                                             class="form-input appearance-none relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 transition-all duration-200 pr-12"
                                             placeholder="Masukkan password Anda">
-                                        <button type="button" onclick="togglePassword()"
+                                        <button type="button" onclick="togglePassword()" aria-label="Tampilkan password"
                                             class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                             <i id="password-icon"
                                                 class="fas fa-eye text-gray-400 hover:text-gray-600 transition-colors duration-200"></i>
@@ -185,7 +200,7 @@
                         <!-- Footer Info -->
                         <div class="mt-8 text-center">
                             <p class="text-sm text-gray-500">
-                                © 2024 MA Al-Muhsinin. Semua hak dilindungi.
+                                © 2025 MA Al-Muhsinin. Semua hak dilindungi.
                             </p>
                             <div class="mt-2 flex justify-center space-x-4">
                                 <a href="#" class="text-gray-400 hover:text-gray-600 transition-colors duration-200">

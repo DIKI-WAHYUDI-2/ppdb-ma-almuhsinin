@@ -203,20 +203,21 @@ class CalonSiswaController extends Controller
         if ($calon_siswa) {
             $hasil_cbt = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->first();
         } else {
-            $hasil_cbt = null; // atau bisa kasih object default kalau mau
+            $hasil_cbt = null;
         }
 
-        // Ambil tes yang tersedia
-        $tes_tersedia = Soal::select('kategori')->distinct()->get();
+        $total_soal = Soal::all()->count();
+        $soal = Soal::select('kategori')->distinct()->get();
+        $sudah_cbt = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->first();
 
-        return view('calon-siswa.cbt.index', compact('calon_siswa', 'hasil_cbt', 'tes_tersedia'));
+        return view('calon-siswa.cbt.index', compact('calon_siswa', 'hasil_cbt', 'soal', 'total_soal', 'sudah_cbt'));
     }
 
 
-    public function mulaiCbt($kategori)
+    public function mulaiCbt()
     {
-        $soal = Soal::where('kategori', $kategori)->inRandomOrder()->take(20)->get();
-        return view('calon-siswa.cbt.test', compact('soal', 'kategori'));
+        $soal = Soal::inRandomOrder()->take(20)->get();
+        return view('calon-siswa.cbt.test', compact('soal'));
     }
 
     public function submitCbt(Request $request)
@@ -242,11 +243,11 @@ class CalonSiswaController extends Controller
 
         // Simpan hasil
         HasilCbt::updateOrCreate(
-            ['calon_siswa_id' => $calon_siswa->id, 'kategori' => $kategori],
+            ['calon_siswa_id' => $calon_siswa->id],
             ['skor' => $skor, 'status' => 'selesai']
         );
 
-        return view('calon-siswa.cbt.hasil', compact('kategori', 'skor', 'benar', 'total'));
+        return view('calon-siswa.cbt.hasil', compact('skor', 'benar', 'total'));
     }
 
 }

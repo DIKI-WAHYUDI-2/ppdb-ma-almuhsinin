@@ -3,6 +3,7 @@
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BerkasController;
 use App\Http\Controllers\CalonSiswaController;
+use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\OrangTuaController;
@@ -63,11 +64,15 @@ Route::put('/dashboard/calon-siswa/upload-berkas/{id}', [BerkasController::class
 
 // CBT routes
 Route::get('/dashboard/calon-siswa/cbt', [CalonSiswaController::class, 'cbt'])->name('calon-siswa.cbt');
-Route::get('/dashboard/calon-siswa/cbt/mulai/{id}', [CalonSiswaController::class, 'mulaiCbt'])->name('calon-siswa.cbt.mulai');
+Route::get('/dashboard/calon-siswa/cbt/mulai', [CalonSiswaController::class, 'mulaiCbt'])->name('calon-siswa.cbt.mulai');
 Route::post('/dashboard/calon-siswa/cbt/submit', [CalonSiswaController::class, 'submitCbt'])->name('calon-siswa.cbt.submit');
 
 Route::get('/surat-keterangan-lulus/{id}', [KelulusanController::class, 'downloadSKL'])
     ->name('surat.keterangan.lulus');
+
+Route::get('/informasi/sekolah', [InformasiController::class, 'halamanInformasiSekolah'])->name('informasi.sekolah');
+Route::get('/informasi/pendaftaran', [InformasiController::class, 'halamanInformasiPendaftaran'])->name('informasi.pendaftaran');
+Route::get('/informasi/grafik', [InformasiController::class, 'halamanInformasiGrafik'])->name('informasi.grafik');
 
 // Operator Dashboard routes
 Route::prefix('operator')->group(function () {

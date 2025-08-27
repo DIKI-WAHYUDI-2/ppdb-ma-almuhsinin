@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBT {{ ucfirst($kategori) }} - MA Al-Muhsinin</title>
+    <title>CBT - MA Al-Muhsinin</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,7 +17,7 @@
             <div class="max-w-6xl mx-auto px-6 py-4">
                 <div class="flex justify-between items-center">
                     <div>
-                        <h1 class="text-xl font-bold text-gray-900">CBT {{ ucfirst($kategori) }}</h1>
+                        <h1 class="text-xl font-bold text-gray-900">CBT</h1>
                         <p class="text-sm text-gray-600">{{ count($soal) }} soal • 30 menit</p>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -71,8 +71,6 @@
                 <div class="lg:col-span-3">
                     <form id="cbtForm" action="{{ route('calon-siswa.cbt.submit') }}" method="POST">
                         @csrf
-                        <input type="hidden" name="kategori" value="{{ $kategori }}">
-
                         @foreach($soal as $index => $s)
                             <div class="question-container bg-white rounded-xl shadow-sm border p-6 mb-6 {{ $index == 0 ? '' : 'hidden' }}"
                                 id="question-{{ $index }}">

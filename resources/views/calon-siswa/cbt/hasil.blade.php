@@ -19,7 +19,7 @@
                 </div>
 
                 <h1 class="text-2xl font-bold text-gray-900 mb-2">Tes Selesai!</h1>
-                <p class="text-gray-600 mb-8">Terima kasih telah mengikuti tes CBT {{ ucfirst($kategori) }}</p>
+                <p class="text-gray-600 mb-8">Terima kasih telah mengikuti tes CBT</p>
 
                 <div class="bg-blue-50 rounded-lg p-6 mb-8">
                     <div class="text-3xl font-bold text-blue-600 mb-2">{{ number_format($skor, 1) }}</div>

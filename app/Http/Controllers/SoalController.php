@@ -39,7 +39,7 @@ class SoalController extends Controller
             $path = $file->storeAs('soal', $filename, 'public'); // Simpan di storage/app/public/soal
 
             Soal::create([
-                'kategori' => $validated['kategori'],
+                'kategori' => ucwords(strtolower($validated['kategori'])),
                 'pertanyaan' => $validated['pertanyaan'],
                 'pilihan_a' => $validated['pilihan_a'],
                 'pilihan_b' => $validated['pilihan_b'],
