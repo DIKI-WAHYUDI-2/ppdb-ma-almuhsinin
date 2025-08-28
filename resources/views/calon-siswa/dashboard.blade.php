@@ -359,7 +359,7 @@
 
                             <div class="max-w-lg mx-auto">
                                 <p class="text-gray-800 mb-4 text-xl leading-relaxed">
-                                    Anda dinyatakan <span class="font-bold text-green-600">LULUS</span> seleksi penerimaan
+                                    Anda dinyatakan <span class="font-bold text-green-600">DITERIMA</span> seleksi penerimaan
                                     siswa baru.
                                 </p>
                                 <p class="text-gray-600 mb-6 text-lg">

@@ -120,13 +120,38 @@
                         <div>
                             <h3 class="text-xl font-semibold">Unggah Dokumen</h3>
                             <p class="text-gray-700 mt-2">Upload scan/foto dokumen yang diminta (format JPG/PNG/PDF),
-                                Ijazah/SKHU, Akta Kelahiran, KK, dan pas foto.</p>
+                                SKHU, SKL, Akta Kelahiran, KK, Pas Foto 2x3, dan Pas Foto 3x4.</p>
                             <p class="text-sm text-gray-500 mt-1">Periksa ukuran file dan nama file sesuai ketentuan
                                 agar tidak gagal upload.</p>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="flex gap-4 mt-6">
+                <div
+                    class="flex-shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
+                    5
+                </div>
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-laptop-code text-2xl text-blue-600 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Mengikuti Ujian CBT</h3>
+                            <p class="text-gray-700 mt-2">
+                                Calon peserta didik wajib mengikuti ujian Computer Based Test (CBT)
+                                sesuai jadwal yang telah ditentukan. Ujian dilaksanakan secara online
+                                di sistem.
+                            </p>
+                            <p class="text-sm text-gray-500 mt-1">
+                                Pastikan perangkat terhubung internet stabil dan login menggunakan akun
+                                yang sudah diberikan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Step 6 -->
             <div class="flex gap-4">

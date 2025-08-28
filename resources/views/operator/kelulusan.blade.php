@@ -149,11 +149,11 @@
                             <div class="flex items-center space-x-3">
                                 @if ($siswa->status_pendaftaran == 'lulus')
                                     <span class="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
-                                        <i class="fas fa-check mr-1"></i>Lulus
+                                        <i class="fas fa-check mr-1"></i>Diterima
                                     </span>
                                 @elseif ($siswa->status_pendaftaran == 'tidak lulus')
                                     <span class="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
-                                        <i class="fas fa-times mr-1"></i>Tidak Lulus
+                                        <i class="fas fa-times mr-1"></i>Tidak Diterima
                                     </span>
                                 @else
                                     <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm font-medium rounded-full">
@@ -307,7 +307,7 @@
                                             class="px-3 py-1 bg-green-600 text-white rounded text-sm flex items-center
                                             ${berkasCount < 6 || skor < 70 ? 'opacity-50 cursor-not-allowed' : ''}"
                                             ${berkasCount < 6 || skor < 70 ? 'disabled' : ''}>
-                                            <i class="fas fa-check mr-1"></i> Lulus
+                                            <i class="fas fa-check mr-1"></i> Diterima
                                         </button>
                                         <button onclick="setKelulusan(${data.calon_siswa.id}, 'tidak lulus')" 
                                             class="px-3 py-1 bg-red-600 text-white rounded text-sm flex items-center">
