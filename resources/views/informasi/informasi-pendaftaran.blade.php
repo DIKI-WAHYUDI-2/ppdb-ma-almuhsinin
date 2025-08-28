@@ -2,10 +2,11 @@
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informasi Pendaftaran - MA Al-Muhsinin</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alur Pendaftaran - MA Al-Muhsinin</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body class="font-sans antialiased bg-gray-50">
@@ -18,84 +19,167 @@
                 <span class="font-bold text-lg">MA Al-Muhsinin</span>
             </div>
             <nav class="hidden md:flex space-x-6">
-                <a href="{{ (route('login')) }}" class="hover:text-gray-200">Beranda</a>
-                <a href="{{ (route('informasi.sekolah')) }}" class="hover:text-gray-200">Informasi Sekolah</a>
-                <a href="{{ route('informasi.pendaftaran') }}" class="hover:text-gray-200">Informasi Pendaftaran</a>
-                <a href="{{ route('informasi.grafik') }}" class="hover:text-gray-200">Grafik Jumlah Pendaftar</a>
+                <a href="{{ route('login') }}" class="hover:text-gray-200">Beranda</a>
+                <a href="{{ route('informasi.sekolah') }}" class="hover:text-gray-200">Informasi Sekolah</a>
+                <a href="{{ route('informasi.pendaftaran') }}" class="hover:text-gray-200">Alur Pendaftaran</a>
+                <a href="{{ route('informasi.grafik') }}" class="hover:text-gray-200">Grafik Pendaftar</a>
             </nav>
+            <!-- mobile menu (simple) -->
+            <div class="md:hidden">
+                <button id="mobileMenuBtn" class="focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- mobile dropdown -->
+        <div id="mobileMenu" class="hidden bg-blue-600 text-white md:hidden">
+            <div class="px-6 py-4 space-y-2">
+                <a href="{{ route('login') }}" class="block">Beranda</a>
+                <a href="{{ route('informasi.sekolah') }}" class="block">Informasi Sekolah</a>
+                <a href="{{ route('informasi.pendaftaran') }}" class="block">Alur Pendaftaran</a>
+                <a href="{{ route('informasi.grafik') }}" class="block">Grafik Pendaftar</a>
+            </div>
         </div>
     </header>
 
-    <!-- Konten -->
-    <main class="pt-28 pb-16 px-6 max-w-6xl mx-auto">
-        <h1 class="text-3xl font-bold text-center text-blue-700 mb-10">Informasi Pendaftaran Peserta Didik Baru</h1>
+    <!-- Main -->
+    <main class="pt-28 pb-16 px-6 max-w-5xl mx-auto">
+        <h1 class="text-3xl font-bold text-center text-blue-700 mb-6">Alur Pendaftaran Peserta Didik Baru (PPDB Online)
+        </h1>
+        <p class="text-center text-gray-600 mb-10">Pendaftaran dilaksanakan secara <strong>online</strong> melalui
+            website resmi PPDB MA Al-Muhsinin. Ikuti langkah berikut agar proses pendaftaran lancar.</p>
 
-        <!-- Persyaratan -->
-        <section class="bg-white p-8 rounded-2xl shadow-md mb-10">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Persyaratan Pendaftaran</h2>
-            <ul class="list-disc pl-6 space-y-2 text-gray-700">
-                <li>Fotokopi Ijazah & SKHU (legalisir) sebanyak 2 lembar</li>
-                <li>Fotokopi Akta Kelahiran & Kartu Keluarga</li>
-                <li>Pas Foto ukuran 3x4 (3 lembar) & 2x3 (2 lembar)</li>
-                <li>Fotokopi KTP Orang Tua/Wali</li>
-                <li>Mengisi formulir pendaftaran secara lengkap</li>
-            </ul>
-        </section>
+        <!-- Timeline / Steps -->
+        <div class="space-y-8">
 
-        <!-- Jadwal -->
-        <section class="bg-white p-8 rounded-2xl shadow-md mb-10">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Jadwal Pendaftaran</h2>
-            <table class="w-full border border-gray-200 text-gray-700">
-                <thead class="bg-blue-600 text-white">
-                    <tr>
-                        <th class="px-4 py-2 border">Kegiatan</th>
-                        <th class="px-4 py-2 border">Tanggal</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="px-4 py-2 border">Pendaftaran Dibuka</td>
-                        <td class="px-4 py-2 border">1 Juni 2025</td>
-                    </tr>
-                    <tr class="bg-gray-50">
-                        <td class="px-4 py-2 border">Penutupan Pendaftaran</td>
-                        <td class="px-4 py-2 border">30 Juli 2025</td>
-                    </tr>
-                    <tr>
-                        <td class="px-4 py-2 border">Seleksi & Wawancara</td>
-                        <td class="px-4 py-2 border">5 - 7 Agustus 2025</td>
-                    </tr>
-                    <tr class="bg-gray-50">
-                        <td class="px-4 py-2 border">Pengumuman</td>
-                        <td class="px-4 py-2 border">10 Agustus 2025</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+            <!-- Step 1 -->
+            <div class="flex gap-4">
+                <div
+                    class="flex-shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
+                    1</div>
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-globe text-2xl text-blue-600 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Akses Website PPDB</h3>
+                            <p class="text-gray-700 mt-2">Buka laman pendaftaran online sekolah. Jika belum ada akun,
+                                pilih menu <em>Daftar</em> untuk membuat akun pendaftaran.</p>
+                            <p class="text-sm text-gray-500 mt-2">Contoh: <code>https://ppdb.ma-almuhsinin.sch.id</code>
+                                (ganti sesuai domain sebenarnya)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- Biaya -->
-        <section class="bg-white p-8 rounded-2xl shadow-md mb-10">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Biaya Pendaftaran</h2>
-            <p class="text-gray-700 mb-2">Biaya pendaftaran sebesar:</p>
-            <p class="text-2xl font-bold text-blue-600">Rp 150.000,-</p>
-            <p class="text-gray-600 mt-2">* Biaya dapat dibayarkan langsung di sekretariat sekolah saat menyerahkan
-                berkas.</p>
-        </section>
+            <!-- Step 2 -->
+            <div class="flex gap-4">
+                <div
+                    class="flex-shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
+                    2</div>
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-user-plus text-2xl text-blue-600 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Daftar dengan Email</h3>
+                            <p class="text-gray-700 mt-2">
+                                Masukkan alamat email aktif yang akan digunakan untuk proses pendaftaran.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex gap-4">
+                <div
+                    class="flex-shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
+                    3</div>
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-file-lines text-2xl text-blue-600 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Isi Formulir Online</h3>
+                            <p class="text-gray-700 mt-2">Lengkapi biodata calon siswa, data orang tua/wali, riwayat
+                                pendidikan dll.</p>
+                            <p class="text-sm text-gray-500 mt-1">Pastikan data diisi sesuai dokumen asli untuk
+                                mempercepat verifikasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="flex gap-4">
+                <div
+                    class="flex-shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
+                    4</div>
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-upload text-2xl text-blue-600 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Unggah Dokumen</h3>
+                            <p class="text-gray-700 mt-2">Upload scan/foto dokumen yang diminta (format JPG/PNG/PDF),
+                                Ijazah/SKHU, Akta Kelahiran, KK, dan pas foto.</p>
+                            <p class="text-sm text-gray-500 mt-1">Periksa ukuran file dan nama file sesuai ketentuan
+                                agar tidak gagal upload.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="flex gap-4">
+                <div
+                    class="flex-shrink-0 w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg font-bold">
+                    6</div>
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow">
+                    <div class="flex items-start gap-4">
+                        <i class="fas fa-user-check text-2xl text-blue-600 mt-1"></i>
+                        <div>
+                            <h3 class="text-xl font-semibold">Pengumuman Kelulusan</h3>
+                            <p class="text-gray-700 mt-2">
+                                Jika dinyatakan <strong>lulus seleksi</strong>, pemberitahuan resmi akan langsung muncul
+                                di
+                                <strong>dashboard calon siswa</strong>. Calon siswa dapat login untuk melihat status
+                                kelulusannya tanpa menunggu email/WA.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <!-- CTA -->
         <div class="text-center mt-12">
             <a href="{{ route('register') }}"
-                class="px-8 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
-                Daftar Sekarang
+                class="inline-flex items-center gap-3 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+                <i class="fas fa-pencil-alt"></i>
+                Daftar Sekarang (PPDB Online)
             </a>
+        </div>
+
+        <!-- Notes -->
+        <div class="max-w-3xl mx-auto mt-8 text-gray-600 text-sm">
+            <p><strong>Catatan:</strong> Pastikan data dan dokumen yang diunggah jelas terbaca. Untuk bantuan teknis
+                atau pertanyaan, hubungi sekretariat sekolah atau panitia PPDB melalui kontak resmi.</p>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-600 text-white py-6 text-center">
+    <footer class="bg-blue-600 text-white py-6 text-center mt-12">
         <p>&copy; 2025 MA Al-Muhsinin. Semua hak dilindungi.</p>
     </footer>
 
+    <script>
+        // mobile menu toggle
+        const btn = document.getElementById('mobileMenuBtn');
+        const menu = document.getElementById('mobileMenu');
+        btn?.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>

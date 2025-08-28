@@ -252,22 +252,9 @@
         document.addEventListener('DOMContentLoaded', function () {
             const ctx = document.getElementById('pendaftarChart').getContext('2d');
 
-            // Data dari PHP - akan diisi oleh Laravel
-            // Untuk demo, menggunakan data contoh
-            const dataFromPHP = [
-                { bulan: 1, total: 85 },
-                { bulan: 2, total: 112 },
-                { bulan: 3, total: 96 },
-                { bulan: 4, total: 128 },
-                { bulan: 5, total: 143 },
-                { bulan: 6, total: 156 },
-                { bulan: 7, total: 178 },
-                { bulan: 8, total: 198 },
-                { bulan: 9, total: 165 },
-                { bulan: 10, total: 142 },
-                { bulan: 11, total: 120 },
-                { bulan: 12, total: 95 }
-            ];
+            // Data dari PHP (akan digantikan dengan data aktual dari Laravel)
+            // Data ini sesuai dengan struktur dari controller Anda
+            const dataFromPHP = @json($pendaftar);
 
             // Format data untuk chart
             const namaBulan = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
@@ -275,14 +262,18 @@
 
             // Isi data dari PHP
             dataFromPHP.forEach(item => {
-                dataTotal[item.bulan - 1] = item.total;
+                // Pastikan bulan antara 1-12
+                if (item.bulan >= 1 && item.bulan <= 12) {
+                    dataTotal[item.bulan - 1] = item.total;
+                }
             });
 
             // Hitung statistik
             const totalPendaftar = dataTotal.reduce((acc, curr) => acc + curr, 0);
-            const rataRata = Math.round(totalPendaftar / 12);
+            const bulanBerisiData = dataTotal.filter(n => n > 0).length;
+            const rataRata = bulanBerisiData > 0 ? Math.round(totalPendaftar / bulanBerisiData) : 0;
             const maxPendaftar = Math.max(...dataTotal);
-            const bulanTertinggi = namaBulan[dataTotal.indexOf(maxPendaftar)];
+            const bulanTertinggi = maxPendaftar > 0 ? namaBulan[dataTotal.indexOf(maxPendaftar)] : '-';
 
             // Update statistik di HTML
             document.getElementById('totalPendaftar').textContent = totalPendaftar.toLocaleString();
@@ -342,7 +333,8 @@
                                 font: {
                                     size: 12
                                 },
-                                // Memastikan angka bulat pada sumbu Y
+                                // Memastikan hanya angka bulat yang ditampilkan
+                                stepSize: 1,
                                 callback: function (value) {
                                     if (value % 1 === 0) {
                                         return value;

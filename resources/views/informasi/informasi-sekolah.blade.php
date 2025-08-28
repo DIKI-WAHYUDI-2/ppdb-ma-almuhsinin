@@ -42,21 +42,31 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-10">Fasilitas Sekolah</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-blue-50 p-6 rounded-2xl shadow">
-                    <i class="fas fa-book-open text-3xl text-blue-600 mb-4"></i>
+
+                <!-- Perpustakaan -->
+                <div class="bg-blue-50 p-6 rounded-2xl shadow text-center">
+                    <img src="https://sman1baturraden.sch.id/wp-content/uploads/2023/08/Perpus-1-scaled-1.jpg"
+                        alt="Perpustakaan Modern" class="w-full h-48 object-cover rounded-xl mb-4">
                     <h3 class="font-semibold text-xl mb-2">Perpustakaan Modern</h3>
                     <p>Ruang baca dengan koleksi buku lengkap dan suasana nyaman.</p>
                 </div>
-                <div class="bg-blue-50 p-6 rounded-2xl shadow">
-                    <i class="fas fa-flask text-3xl text-blue-600 mb-4"></i>
-                    <h3 class="font-semibold text-xl mb-2">Laboratorium Sains</h3>
-                    <p>Laboratorium biologi, kimia, dan fisika untuk mendukung pembelajaran.</p>
+
+                <!-- Laboratorium -->
+                <div class="bg-blue-50 p-6 rounded-2xl shadow text-center">
+                    <img src="https://ponpesnurulhayah.com/wp-content/uploads/2022/03/WhatsApp-Image-2022-03-12-at-06.10.34-1.jpeg"
+                        alt="Laboratorium Komputer" class="w-full h-48 object-cover rounded-xl mb-4">
+                    <h3 class="font-semibold text-xl mb-2">Laboratorium Komputer</h3>
+                    <p>Dilengkapi komputer modern untuk mendukung pembelajaran berbasis teknologi.</p>
                 </div>
-                <div class="bg-blue-50 p-6 rounded-2xl shadow">
-                    <i class="fas fa-futbol text-3xl text-blue-600 mb-4"></i>
+
+                <!-- Lapangan -->
+                <div class="bg-blue-50 p-6 rounded-2xl shadow text-center">
+                    <img src="https://asset-2.tribunnews.com/makassar/foto/bank/images/hari-santri_20171022_135828.jpg"
+                        alt="Lapangan Olahraga" class="w-full h-48 object-cover rounded-xl mb-4">
                     <h3 class="font-semibold text-xl mb-2">Lapangan Olahraga</h3>
                     <p>Lapangan sepak bola, voli, dan basket untuk aktivitas olahraga siswa.</p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -67,13 +77,19 @@
             <h2 class="text-3xl font-bold text-center mb-10">Prestasi Siswa</h2>
             <ul class="space-y-6 max-w-2xl mx-auto">
                 <li class="bg-white shadow p-6 rounded-xl">
-                    🏆 Juara 1 Olimpiade Sains Kabupaten 2024
+                    🏅 Juara 2 Olimpiade Sains Tingkat Kecamatan Rimba Melintang 2023
                 </li>
                 <li class="bg-white shadow p-6 rounded-xl">
-                    🥇 Juara Umum Lomba MTQ Antar Madrasah 2023
+                    🕌 Juara 1 MTQ (Musabaqah Tilawatil Qur’an) Tingkat Kecamatan 2024
                 </li>
                 <li class="bg-white shadow p-6 rounded-xl">
-                    🎨 Juara 2 Lomba Desain Poster Nasional 2022
+                    📖 Harapan 2 Lomba Tahfidz Juz 30 Tingkat Kabupaten Rokan Hilir 2023
+                </li>
+                <li class="bg-white shadow p-6 rounded-xl">
+                    🎤 Juara 3 Lomba Pidato Bahasa Arab Tingkat Kabupaten 2022
+                </li>
+                <li class="bg-white shadow p-6 rounded-xl">
+                    ⚽ Juara 2 Futsal Antar Madrasah se-Kecamatan Rimba Melintang 2023
                 </li>
             </ul>
         </div>
@@ -84,25 +100,59 @@
         <div class="max-w-7xl mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-10">Ekstrakurikuler</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+
+                <!-- Tahfidzul Qur’an -->
                 <div class="p-6 bg-indigo-50 rounded-2xl shadow">
-                    <i class="fas fa-microphone text-3xl text-indigo-600 mb-3"></i>
-                    <h3 class="font-semibold">Paduan Suara</h3>
+                    <img src="https://pesantrenterbaikindonesia.home.blog/wp-content/uploads/2019/02/hafalanoke.jpg?w=448"
+                        alt="Tahfidzul Qur’an" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <h3 class="font-semibold">Tahfidzul Qur’an</h3>
                 </div>
+
+                <!-- Qiro’ah -->
                 <div class="p-6 bg-indigo-50 rounded-2xl shadow">
-                    <i class="fas fa-paint-brush text-3xl text-indigo-600 mb-3"></i>
-                    <h3 class="font-semibold">Seni & Lukis</h3>
+                    <img src="https://lh4.googleusercontent.com/proxy/jTDbIYX77VIU0Or7bjRU3QED6DAGq4QoyRgJSGqwvXixSLEyM5TVYF8VKEIghPrZ5NXxMvRl_cfqTaLDMcVyzWldke0xgx7hnVYkTQ4hJv659X6XopyBrbAoo3Pp8Ys7PFaiaL8P"
+                        alt="Qiro’ah / Tilawah" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <h3 class="font-semibold">Qiro’ah / Tilawah</h3>
                 </div>
+
+                <!-- Kitab Kuning -->
                 <div class="p-6 bg-indigo-50 rounded-2xl shadow">
-                    <i class="fas fa-quran text-3xl text-indigo-600 mb-3"></i>
-                    <h3 class="font-semibold">Rohis & Tahfidz</h3>
+                    <img src="https://static.republika.co.id/uploads/images/xlarge/029368800-1658589446-1280-856.jpg"
+                        alt="Kajian Kitab Kuning" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <h3 class="font-semibold">Kajian Kitab Kuning</h3>
                 </div>
+
+                <!-- Hadrah / Marawis -->
                 <div class="p-6 bg-indigo-50 rounded-2xl shadow">
-                    <i class="fas fa-drum text-3xl text-indigo-600 mb-3"></i>
-                    <h3 class="font-semibold">Marawis</h3>
+                    <img src="https://www.darussalam-tasik.or.id/blogimages/img_2310_1568355624.jpg"
+                        alt="Hadrah / Marawis" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <h3 class="font-semibold">Pencak Silat</h3>
                 </div>
+
+                <!-- Hadrah / Marawis -->
+                <div class="p-6 bg-indigo-50 rounded-2xl shadow">
+                    <img src="https://darunnajah.com/wp-content/uploads/2017/10/WhatsApp-Image-2017-10-21-at-14.02.28.jpeg"
+                        alt="Hadrah / Marawis" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <h3 class="font-semibold">Paskibra</h3>
+                </div>
+
+                <!-- Hadrah / Marawis -->
+                <div class="p-6 bg-indigo-50 rounded-2xl shadow">
+                    <img src="https://darulistiqamah.ponpes.id/wp-content/uploads/2022/12/WhatsApp-Image-2022-12-21-at-09.45.57-1-1-1024x768.jpeg"
+                        alt="Hadrah / Marawis" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <h3 class="font-semibold">Futsal</h3>
+                </div>
+
+                <div class="p-6 bg-indigo-50 rounded-2xl shadow">
+                    <img src="https://alamanah.or.id/wp-content/uploads/2023/08/photo_2023-08-19_21-52-15.jpg"
+                        alt="Hadrah / Marawis" class="w-full h-40 object-cover rounded-xl mb-3">
+                    <h3 class="font-semibold">Panahan</h3>
+                </div>
+
             </div>
         </div>
     </section>
+
 
     <!-- Footer -->
     <footer class="bg-blue-700 text-white py-6 text-center">
