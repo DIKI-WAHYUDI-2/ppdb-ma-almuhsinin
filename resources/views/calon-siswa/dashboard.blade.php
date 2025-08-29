@@ -301,7 +301,7 @@
                                     @endif
 
                                     <!-- Timeline Item 5 -->
-                                    @if ($calon_siswa->status_pendaftaran == 'lulus')
+                                    @if ($calon_siswa && $calon_siswa->status_pendaftaran == 'lulus')
                                         <div class="flex items-start">
                                             <div
                                                 class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -332,7 +332,7 @@
             </main>
         </main>
 
-        @if ($calon_siswa->status_pendaftaran == 'lulus'){
+        @if ($calon_siswa && $calon_siswa->status_pendaftaran == 'lulus'){
             <div id="modalKelulusan"
                 class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300">
                 <div
@@ -359,7 +359,8 @@
 
                             <div class="max-w-lg mx-auto">
                                 <p class="text-gray-800 mb-4 text-xl leading-relaxed">
-                                    Anda dinyatakan <span class="font-bold text-green-600">DITERIMA</span> seleksi penerimaan
+                                    Anda dinyatakan <span class="font-bold text-green-600">DITERIMA</span> seleksi
+                                    penerimaan
                                     siswa baru.
                                 </p>
                                 <p class="text-gray-600 mb-6 text-lg">

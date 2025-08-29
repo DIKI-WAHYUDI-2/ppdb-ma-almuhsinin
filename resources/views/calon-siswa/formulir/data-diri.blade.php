@@ -60,6 +60,13 @@
 
     <!-- Main Content -->
     <div class="lg:ml-64">
+        @if(session('error'))
+            <div class="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 mb-4 flex items-center">
+                <i class="fas fa-exclamation-circle mr-2"></i>
+                <span>{{ session('error') }}</span>
+            </div>
+        @endif
+
         <!-- Header -->
         <header class="bg-white shadow-sm border-b border-gray-200">
             <div class="flex justify-between items-center px-6 py-4">

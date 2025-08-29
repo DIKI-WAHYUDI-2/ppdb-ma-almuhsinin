@@ -79,7 +79,7 @@
                             <i class="fas fa-user-graduate text-green-600 text-xl"></i>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-600">Lulus</p>
+                            <p class="text-sm font-medium text-gray-600">Diterima</p>
                             <p class="text-2xl font-bold text-gray-900">{{ $jumlah_siswa_lulus }}</p>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                             <i class="fas fa-user-times text-red-600 text-xl"></i>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-gray-600">Tidak Lulus</p>
+                            <p class="text-sm font-medium text-gray-600">Tidak Diterima</p>
                             <p class="text-2xl font-bold text-gray-900">{{ $jumlah_siswa_tidak_lulus }}</p>
                         </div>
                     </div>

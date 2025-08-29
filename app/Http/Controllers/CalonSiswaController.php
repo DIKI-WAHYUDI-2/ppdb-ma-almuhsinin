@@ -200,18 +200,18 @@ class CalonSiswaController extends Controller
         $akun_id = Auth::id();
         $calon_siswa = CalonSiswa::where('akun_id', $akun_id)->first();
 
-        if ($calon_siswa) {
-            $hasil_cbt = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->first();
-        } else {
-            $hasil_cbt = null;
+        if (!$calon_siswa) {
+            return redirect()->route('calon-siswa.data-diri')
+                ->with('error', 'Silakan lengkapi data diri Anda terlebih dahulu.');
         }
 
-        $total_soal = Soal::all()->count();
+        $hasil_cbt = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->first();
+        $total_soal = Soal::count();
         $soal = Soal::select('kategori')->distinct()->get();
-        $sudah_cbt = HasilCbt::where('calon_siswa_id', $calon_siswa->id)->first();
 
-        return view('calon-siswa.cbt.index', compact('calon_siswa', 'hasil_cbt', 'soal', 'total_soal', 'sudah_cbt'));
+        return view('calon-siswa.cbt.index', compact('calon_siswa', 'hasil_cbt', 'soal', 'total_soal'));
     }
+
 
 
     public function mulaiCbt()
