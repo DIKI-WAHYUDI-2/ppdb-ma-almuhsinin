@@ -51,6 +51,11 @@
                     <i class="fas fa-user-graduate mr-3"></i>
                     Kelulusan
                 </a>
+                <a href="{{ route('jadwal.index') }}"
+                    class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                    <i class="fas fa-calendar-days mr-3"></i>
+                    Jadwal PPDB
+                </a>
             </div>
         </nav>
     </div>

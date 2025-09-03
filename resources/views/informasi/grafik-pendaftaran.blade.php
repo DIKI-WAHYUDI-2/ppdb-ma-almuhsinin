@@ -282,21 +282,20 @@
 
             // Buat chart
             const chart = new Chart(ctx, {
-                type: 'line',
+                type: 'bar',
                 data: {
                     labels: namaBulan,
                     datasets: [{
                         label: 'Jumlah Pendaftar',
                         data: dataTotal,
                         borderColor: '#4361ee',
-                        backgroundColor: 'rgba(67, 97, 238, 0.1)',
+                        backgroundColor: 'rgba(67, 97, 238, 0.7)',
                         fill: true,
                         tension: 0.4,
                         pointBackgroundColor: '#4361ee',
                         pointBorderColor: '#ffffff',
-                        pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 7
+                        borderWidth: 1,
+                        borderRadius: 6
                     }]
                 },
                 options: {

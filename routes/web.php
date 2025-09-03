@@ -4,6 +4,7 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\BerkasController;
 use App\Http\Controllers\CalonSiswaController;
 use App\Http\Controllers\InformasiController;
+use App\Http\Controllers\JadwalPPDBController;
 use App\Http\Controllers\KelulusanController;
 use App\Http\Controllers\KepalaSekolahController;
 use App\Http\Controllers\OrangTuaController;
@@ -99,6 +100,11 @@ Route::prefix('operator')->group(function () {
     Route::get('/soal/{id}', [SoalController::class, 'show'])->name('soal.show');
     Route::put('/soal/{id}', [SoalController::class, 'update'])->name('soal.update');
     Route::delete('/soal/{id}', [SoalController::class, 'destroy'])->name('soal.destroy');
+
+    Route::get('/jadwal', [JadwalPPDBController::class, 'index'])->name('jadwal.index');
+    Route::post('/jadwal', [JadwalPPDBController::class, 'store'])->name('jadwal.store');
+    Route::put('/jadwal/{id}', [JadwalPPDBController::class, 'update'])->name('jadwal.update');
+    Route::delete('/jadwal/{id}', [JadwalPPDBController::class, 'destroy'])->name('jadwal.destroy');
 });
 
 Route::prefix('kepala-sekolah')->group(function () {

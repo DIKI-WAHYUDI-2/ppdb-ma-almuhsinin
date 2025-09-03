@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CalonSiswa;
+use App\Models\JadwalPPDB;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class InformasiController extends Controller
 
     public function halamanInformasiPendaftaran()
     {
-        return view('informasi.informasi-pendaftaran');
+        $jadwal = JadwalPPDB::all();
+        return view('informasi.informasi-pendaftaran', compact('jadwal'));
     }
 
     public function halamanInformasiGrafik()

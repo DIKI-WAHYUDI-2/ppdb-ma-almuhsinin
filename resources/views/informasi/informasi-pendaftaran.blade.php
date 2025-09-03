@@ -49,6 +49,33 @@
         </h1>
         <p class="text-center text-gray-600 mb-10">Pendaftaran dilaksanakan secara <strong>online</strong> melalui
             website resmi PPDB MA Al-Muhsinin. Ikuti langkah berikut agar proses pendaftaran lancar.</p>
+        <!-- Informasi Tanggal Pendaftaran -->
+        <div class="bg-white p-6 rounded-2xl shadow mb-10">
+            <h2 class="text-2xl font-semibold text-blue-700 mb-5 text-center">
+                Jadwal Pendaftaran PPDB
+            </h2>
+
+            <ul class="space-y-3">
+                @foreach ($jadwal as $jad)
+                    <li class="text-gray-700">
+                        <i class="fas fa-calendar-days text-blue-600 mr-2"></i>
+                        <strong>{{ $jad->tahap }}</strong>:
+                        @if($jad->mulai && $jad->selesai)
+                            {{ \Carbon\Carbon::parse($jad->mulai)->translatedFormat('d F') }}
+                            – {{ \Carbon\Carbon::parse($jad->selesai)->translatedFormat('d F Y') }}
+                        @elseif($jad->mulai && !$jad->selesai)
+                            {{ \Carbon\Carbon::parse($jad->mulai)->translatedFormat('d F Y') }}
+                        @else
+                            <span class="text-gray-500">Belum ditentukan</span>
+                        @endif
+                    </li>
+                @endforeach
+            </ul>
+
+            <p class="text-sm text-gray-500 mt-5 text-center">
+                *Tanggal dan waktu pendaftaran dapat berubah sesuai keputusan panitia.
+            </p>
+        </div>
 
         <!-- Timeline / Steps -->
         <div class="space-y-8">
